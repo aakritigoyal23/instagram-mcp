@@ -29,7 +29,8 @@ import sys
 import time
 from pathlib import Path
 from typing import Annotated, Literal
-
+from starlette.requests import Request
+from starlette.responses import PlainTextResponse
 import httpx
 from dotenv import load_dotenv
 from fastmcp import FastMCP
@@ -70,6 +71,9 @@ else:
 # The access token is held server-side in env vars, so the endpoint itself needs no sign-in.
 # MCP server name = account name so Claude's tool picker shows the right label
 mcp = FastMCP(ACCOUNT_NAME)
+@mcp.custom_route("/", methods=["GET", "HEAD"])
+async def root(request: Request) -> PlainTextResponse:
+    return PlainTextResponse("Instagram MCP server is running")
 
 
 
