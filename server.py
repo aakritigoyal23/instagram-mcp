@@ -33,6 +33,7 @@ from typing import Annotated, Literal
 import httpx
 from dotenv import load_dotenv
 from fastmcp import FastMCP
+
 from pydantic import Field
 
 # Load .env from the same directory as this script
@@ -66,11 +67,10 @@ else:
     GRAPH = "https://graph.instagram.com/v21.0"
     BASE = "/me"                          # account addressed by /me
     DM_BASE = "/me"
-
-# No auth — Claude.ai supports unauthenticated remote MCP connectors.
 # The access token is held server-side in env vars, so the endpoint itself needs no sign-in.
 # MCP server name = account name so Claude's tool picker shows the right label
 mcp = FastMCP(ACCOUNT_NAME)
+
 
 
 # ────────────────────────────────────────────────────────────────────────────
